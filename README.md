@@ -2,6 +2,9 @@
 
 > **Turn unclear open-source issues into well-defined tasks, and turn those tasks into actionable contribution plans.**
 
+<img width="2265" height="1941" alt="image" src="https://github.com/user-attachments/assets/4bdbed83-be36-4975-9a26-1b7cdc86ed02" />
+
+
 IssueBridge is a developer tool that bridges the gap between open-source issue quality and contributor onboarding. It uses locally running **Gemma 4** through **Ollama** for AI inference, alongside the public **GitHub REST API** for verified repository evidence.
 
 No Google Gemini API key or hosted inference service is required.
