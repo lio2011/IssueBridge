@@ -1,0 +1,57 @@
+{
+  "title": "Fix table export failure when active date filters are applied",
+  "issue_type": "bug",
+  "summary": "Export button fails silently when date range filters are applied, preventing users from downloading filtered tabular data.",
+  "markdown_body": "## Problem\nWhen exporting reports with active date filters, the export process terminates without generating or downloading the CSV file.\n\n## Actual behavior\nClicking 'Export CSV' displays a transient loading spinner, but no download begins and no user-facing error message is shown.\n\n## Expected behavior\nThe filtered dataset should be serialized and downloaded as a CSV file matching the selected date range criteria.\n\n## Steps to reproduce\n1. Navigate to Reports view\n2. Set Date Range filter to Last 30 Days\n3. Click Export CSV button\n\n## Environment\nChrome 130 on Windows 11\n\n## Acceptance criteria\n- [ ] Export initiates correctly when date range filters are active\n- [ ] Exported CSV contents match the filtered records exactly\n- [ ] Appropriate error notification is displayed if serialization fails\n- [ ] Unit and integration tests added for filter export serialization",
+  "acceptance_criteria": [
+    "Export initiates correctly when date range filters are active",
+    "Exported CSV contents match the filtered records exactly",
+    "Appropriate error notification is displayed if serialization fails",
+    "Unit and integration tests added for filter export serialization"
+  ],
+  "suggested_labels": [
+    "bug",
+    "export",
+    "contributor-friendly"
+  ],
+  "missing_information": [
+    {
+      "field": "Console stack trace",
+      "question": "What is the exact exception message and line number in the console logs?",
+      "why_needed": "Allows pinpointing the exact serializer function that threw the error."
+    }
+  ],
+  "readiness_status": "ready_for_review",
+  "readiness_checklist": [
+    {
+      "item": "Clear problem statement",
+      "status": "present",
+      "explanation": "The initial description provides sufficient detail to understand the general issue."
+    },
+    {
+      "item": "Actual observed behavior",
+      "status": "present",
+      "explanation": "Observed failure or behavior is explicitly detailed."
+    },
+    {
+      "item": "Expected behavior",
+      "status": "present",
+      "explanation": "Desired or intended behavior is clearly articulated."
+    },
+    {
+      "item": "Reproduction steps",
+      "status": "present",
+      "explanation": "Structured steps to reproduce the issue were provided."
+    },
+    {
+      "item": "Acceptance criteria",
+      "status": "present",
+      "explanation": "Includes 4 suggested acceptance criteria for maintainer review."
+    },
+    {
+      "item": "Repository context",
+      "status": "present",
+      "explanation": "Repository metadata and public GitHub context verified."
+    }
+  ]
+}

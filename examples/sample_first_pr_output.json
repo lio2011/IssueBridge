@@ -1,0 +1,110 @@
+{
+  "issue_summary": {
+    "title": "Fix table export failure when active date filters are applied",
+    "repository_name": "facebook/react",
+    "original_issue_url": null,
+    "beginner_explanation": "Users attempting to export report data while filtering by date experience silent failures. The serializer appears to misinterpret or reject date range parameters.",
+    "expected_outcome": "CSV file exports cleanly reflecting whatever date range or filters the user has active.",
+    "acceptance_criteria": [
+      "Export initiates correctly when date range filters are active",
+      "Exported CSV contents match the filtered records exactly",
+      "Appropriate error notification is displayed if serialization fails"
+    ],
+    "unknowns": [
+      "Does this affect other export formats (e.g. JSON/PDF) or strictly CSV?"
+    ]
+  },
+  "repository_summary": {
+    "description": "The library for web and native user interfaces.",
+    "default_branch": "main",
+    "readme_summary": "React is a JavaScript library for building user interfaces.",
+    "contributing_summary": "Please review the Code of Conduct and CONTRIBUTING.md before opening pull requests.",
+    "setup_commands": [
+      "yarn install",
+      "yarn start"
+    ],
+    "test_commands": [
+      "yarn test"
+    ],
+    "documentation_links": [
+      {
+        "name": "Repository Home",
+        "url": "https://github.com/facebook/react"
+      },
+      {
+        "name": "README",
+        "url": "https://github.com/facebook/react/blob/main/README.md"
+      }
+    ]
+  },
+  "relevant_files": [
+    {
+      "evidence_id": "F1",
+      "path": "packages/react-devtools-shared/src/devtools/views/Components/ExportButton.js",
+      "url": "https://github.com/facebook/react/blob/main/packages/react-devtools-shared/src/devtools/views/Components/ExportButton.js",
+      "why_relevant": "Contains click handler that triggers the report serialization workflow.",
+      "what_to_inspect": "Inspect export onClick callback and error handling around the export dispatcher."
+    }
+  ],
+  "implementation_steps": [
+    {
+      "step_number": 1,
+      "action": "Inspect ExportButton click handler and logger",
+      "rationale": "Verify where the active filter object is serialized before invoking the exporter.",
+      "evidence_ids": ["F1"],
+      "expected_outcome": "Identify where the date range parameters cause an unhandled rejection."
+    },
+    {
+      "step_number": 2,
+      "action": "Ensure serializer handles date range objects and null boundaries safely",
+      "rationale": "Prevent null reference or format mismatch during parameter parsing.",
+      "evidence_ids": ["F1"],
+      "expected_outcome": "Filtered records serialize without throwing exceptions."
+    },
+    {
+      "step_number": 3,
+      "action": "Add regression test covering export with active date filters",
+      "rationale": "Prevent future regressions when filter components are updated.",
+      "evidence_ids": ["F1"],
+      "expected_outcome": "Test suite runs and passes cleanly."
+    }
+  ],
+  "suggested_tests": [
+    {
+      "test_type": "suggested_new",
+      "description": "Test CSV export with active start and end date filters",
+      "target_file_or_module": "packages/react-devtools-shared/src/devtools/views/Components/ExportButton.test.js",
+      "expected_behavior": "Generates valid CSV blob and triggers download without unhandled rejection.",
+      "evidence_ids": ["F1"]
+    }
+  ],
+  "unknowns": [
+    "Does this affect other export formats (e.g. JSON/PDF) or strictly CSV?"
+  ],
+  "pr_checklist": [
+    {
+      "item": "Change scope is strictly limited to the issue.",
+      "completed": false
+    },
+    {
+      "item": "Relevant tests have been run locally by contributor.",
+      "completed": false
+    },
+    {
+      "item": "Regression test coverage has been added where appropriate.",
+      "completed": false
+    },
+    {
+      "item": "Documentation has been updated if user-facing behavior changed.",
+      "completed": false
+    },
+    {
+      "item": "PR description clearly explains the problem and the solution.",
+      "completed": false
+    },
+    {
+      "item": "Repository contribution guidelines have been checked.",
+      "completed": false
+    }
+  ]
+}

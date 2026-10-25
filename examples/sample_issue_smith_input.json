@@ -1,0 +1,9 @@
+{
+  "repo_url": "https://github.com/facebook/react",
+  "raw_description": "The export feature fails sometimes when filters are applied.",
+  "actual_behavior": "When a user selects a date filter and clicks export, the spinner shows but nothing downloads.",
+  "expected_behavior": "The filtered data should download as a CSV file matching the active filter parameters.",
+  "steps_to_reproduce": "1. Navigate to Reports view\n2. Set Date Range filter to Last 30 Days\n3. Click Export CSV button",
+  "environment": "Chrome 130 on Windows 11",
+  "additional_context": "Console logs show an uncaught rejection in table export serializer."
+}
